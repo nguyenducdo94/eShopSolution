@@ -109,6 +109,16 @@ namespace eShopSolution.AdminApp.Controllers
             return View(roleAssignRequest);
         }
 
+        [HttpGet("details/{id}")]
+        public async Task<IActionResult> Details(int id)
+        {
+            var languageId = HttpContext.Session.GetString(SystemConstants.AppSettings.DefaultLanguageId);
+
+            var product = await _productApiClient.GetById(id, languageId);
+            
+            return View(product);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
